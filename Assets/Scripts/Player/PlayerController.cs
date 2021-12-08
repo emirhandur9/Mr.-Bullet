@@ -57,5 +57,18 @@ public class PlayerController : MonoBehaviour
     private void Shoot()
     {
         lineRenderer.enabled = false;
+
+        GameObject b = Instantiate(bullet, firePos1.position, Quaternion.identity);
+
+        if(transform.localScale.x > 0)
+        {
+            b.GetComponent<Rigidbody2D>().AddForce(firePos1.right * bulletSpeed, ForceMode2D.Impulse);
+        }
+        else
+        {
+            b.GetComponent<Rigidbody2D>().AddForce(-firePos1.right * bulletSpeed, ForceMode2D.Impulse);
+        }
+
+        Destroy(b, 2);
     }
 }

@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour
     public float rotateSpeed = 100;
     public float bulletSpeed = 100;
 
+    public int ammo = 4;
+
     private Transform handPos;
     private Transform firePos1;
     private Transform firePos2;
@@ -37,7 +39,13 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0))
         {
-            Shoot();
+            if(ammo > 0)
+                Shoot();
+            else
+            {
+                lineRenderer.enabled = false;
+                //crosshair
+            }
         }
     }
 
@@ -68,7 +76,7 @@ public class PlayerController : MonoBehaviour
         {
             b.GetComponent<Rigidbody2D>().AddForce(-firePos1.right * bulletSpeed, ForceMode2D.Impulse);
         }
-
+        ammo--;
         Destroy(b, 2);
     }
 }

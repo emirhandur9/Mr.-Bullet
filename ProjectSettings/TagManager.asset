@@ -7,6 +7,12 @@ TagManager:
   - Bullet
   - Head
   - Enemy
+  - Box
+  - BoxPlank
+  - Plank
+  - Tnt
+  - Ground
+  - EnemyItself
   layers:
   - Default
   - TransparentFX
@@ -50,9 +56,12 @@ TagManager:
   - name: Ground
     uniqueID: 2567034633
     locked: 0
-  - name: Player
-    uniqueID: 3231299597
+  - name: Env
+    uniqueID: 3108693027
     locked: 0
   - name: Enemy
     uniqueID: 1557705921
+    locked: 0
+  - name: Player
+    uniqueID: 3231299597
     locked: 0

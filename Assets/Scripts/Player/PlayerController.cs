@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour
 {
@@ -32,21 +33,25 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButton(0))
+        if (!IsMouseOverUI())
         {
-            Aim();
-        }
-
-        if (Input.GetMouseButtonUp(0))
-        {
-            if(ammo > 0)
-                Shoot();
-            else
+            if (Input.GetMouseButton(0))
             {
-                lineRenderer.enabled = false;
-                //crosshair
+                Aim();
+            }
+
+            if (Input.GetMouseButtonUp(0))
+            {
+                if (ammo > 0)
+                    Shoot();
+                else
+                {
+                    lineRenderer.enabled = false;
+                    //crosshair
+                }
             }
         }
+        
     }
 
 
@@ -77,6 +82,12 @@ public class PlayerController : MonoBehaviour
             b.GetComponent<Rigidbody2D>().AddForce(-firePos1.right * bulletSpeed, ForceMode2D.Impulse);
         }
         ammo--;
+        GameManager.instance.CheckBulletUI();
         Destroy(b, 2);
+    }
+
+    bool IsMouseOverUI()
+    {
+        return EventSystem.current.IsPointerOverGameObject();
     }
 }

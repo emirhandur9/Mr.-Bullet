@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class GameManager : MonoBehaviour
@@ -13,11 +14,13 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     private PlayerController playerController;
 
+    private int levelNumber;
 
     private void Awake()
     {
         instance = this;
         playerController = FindObjectOfType<PlayerController>();
+        levelNumber = PlayerPrefs.GetInt("Level", 1);
     }
 
 
@@ -39,6 +42,10 @@ public class GameManager : MonoBehaviour
         if(enemyCount <= 0)
         {
             UIManager.instance.Win();
+            if (levelNumber >= SceneManager.GetActiveScene().buildIndex)
+            {
+                PlayerPrefs.SetInt("Level", levelNumber + 1);   
+            }
         }
     }
 

@@ -111,7 +111,7 @@ public class UIManager : MonoBehaviour
 
     public void Quit()
     {
-        Application.Quit();
+        SceneManager.LoadScene(0);
     }
 
     public void NextLevel()

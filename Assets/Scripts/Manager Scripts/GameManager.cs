@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+
 
 public class GameManager : MonoBehaviour
 {
@@ -11,70 +11,25 @@ public class GameManager : MonoBehaviour
     public bool gameOver;
 
     public static GameManager instance;
-    private PlayerController player;
+    private PlayerController playerController;
 
-    public int blackBullets = 3;
-    public int goldenBullets = 1;
-
-    public GameObject blackBullet, goldenBullet;
-    private GameObject bullets;
-
-    private List<GameObject> goldenBulletUI = new List<GameObject>();
-    private List<GameObject> blackBulletUI = new List<GameObject>();
 
     private void Awake()
     {
         instance = this;
-        player = FindObjectOfType<PlayerController>();
-        player.ammo = blackBullets + goldenBullets;
-        bullets = GameObject.Find("Bullets");
-
-        CreateBulletUI();
+        playerController = FindObjectOfType<PlayerController>();
     }
 
-    private void Start()
-    {
-        
-    }
 
     private void Update()
     {
-        if(!gameOver && player.ammo <= 0 && enemyCount > 0)
+        if(!gameOver && playerController.ammo <= 0 && enemyCount > 0 && GameObject.FindGameObjectsWithTag("Bullet").Length <= 0)
         {
             gameOver = true;
+            UIManager.instance.gameOverPanel.SetActive(true);
         }
     }
 
-    private void CreateBulletUI()
-    {
-        for (int i = 0; i < blackBullets; i++)
-        {
-            GameObject bbTemp = Instantiate(blackBullet);
-            bbTemp.transform.SetParent(bullets.transform);
-            blackBulletUI.Add(bbTemp);
-        }
-
-        for (int i = 0; i < goldenBullets; i++)
-        {
-            GameObject bbTemp = Instantiate(goldenBullet);
-            bbTemp.transform.SetParent(bullets.transform);
-            goldenBulletUI.Add(bbTemp);
-        }
-    }
-
-    public void CheckBulletUI()
-    {
-        if(goldenBullets > 0)
-        {
-            goldenBulletUI[goldenBullets - 1].GetComponent<CanvasGroup>().alpha = 0.3f;
-            goldenBullets--;
-        }
-        else if(blackBullets > 0)
-        {
-            blackBulletUI[blackBullets - 1].GetComponent<CanvasGroup>().alpha = 0.3f;
-            blackBullets--;
-        }
-    }
 
     public void CheckEnemyCount()
     {
@@ -83,12 +38,11 @@ public class GameManager : MonoBehaviour
 
         if(enemyCount <= 0)
         {
-            print("WÝN");
+            UIManager.instance.Win();
         }
     }
 
-    public void Restart()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
+    
+
+    
 }

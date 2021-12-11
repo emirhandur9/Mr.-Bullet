@@ -8,7 +8,10 @@ public class PlayerController : MonoBehaviour
     public float rotateSpeed = 100;
     public float bulletSpeed = 100;
 
-    public int ammo = 4;
+    public int ammo;
+    public int startingAmmo;
+    public int blackBullets = 3;
+    public int goldenBullets = 1;
 
     private Transform handPos;
     private Transform firePos1;
@@ -19,9 +22,13 @@ public class PlayerController : MonoBehaviour
     public GameObject bullet;
 
     private Camera cam;
+    private GameObject crossHair;
 
+    public AudioClip gunShoot;
     private void Awake()
     {
+        crossHair = GameObject.Find("CrossHair");
+        crossHair.SetActive(false);
         handPos = GameObject.Find("LeftArm").transform;
         firePos1 = GameObject.Find("FirePos1").transform;
         firePos2 = GameObject.Find("FirePos2").transform;
@@ -29,6 +36,9 @@ public class PlayerController : MonoBehaviour
         lineRenderer = GameObject.Find("Gun").GetComponent<LineRenderer>();
         lineRenderer.enabled = false;
         cam = Camera.main;
+
+        ammo = blackBullets + goldenBullets;
+        startingAmmo = ammo;
     }
 
     private void Update()
@@ -47,7 +57,7 @@ public class PlayerController : MonoBehaviour
                 else
                 {
                     lineRenderer.enabled = false;
-                    //crosshair
+                    crossHair.SetActive(false);
                 }
             }
         }
@@ -57,6 +67,7 @@ public class PlayerController : MonoBehaviour
 
     private void Aim()
     {
+        crossHair.SetActive(true);
         var dir = Input.mousePosition - cam.WorldToScreenPoint(handPos.position);
         var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + 90;
         handPos.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
@@ -65,25 +76,32 @@ public class PlayerController : MonoBehaviour
         lineRenderer.SetPosition(0, firePos1.position);
         lineRenderer.SetPosition(1, firePos2.position);
 
+        Vector3 crossHairPos = cam.ScreenToWorldPoint(Input.mousePosition);
+        crossHairPos.z = transform.position.z;
+        crossHair.transform.position = crossHairPos;
+
     }
 
     private void Shoot()
     {
         lineRenderer.enabled = false;
+        crossHair.SetActive(false);
 
-        GameObject b = Instantiate(bullet, firePos1.position, Quaternion.identity);
+
+        GameObject bullet = Instantiate(this.bullet, firePos1.position, Quaternion.identity);
 
         if(transform.localScale.x > 0)
         {
-            b.GetComponent<Rigidbody2D>().AddForce(firePos1.right * bulletSpeed, ForceMode2D.Impulse);
+            bullet.GetComponent<Rigidbody2D>().AddForce(firePos1.right * bulletSpeed, ForceMode2D.Impulse);
         }
         else
         {
-            b.GetComponent<Rigidbody2D>().AddForce(-firePos1.right * bulletSpeed, ForceMode2D.Impulse);
+            bullet.GetComponent<Rigidbody2D>().AddForce(-firePos1.right * bulletSpeed, ForceMode2D.Impulse);
         }
         ammo--;
-        GameManager.instance.CheckBulletUI();
-        Destroy(b, 2);
+        SoundManager.instance.PlaySoundFX(gunShoot, .3f);
+        UIManager.instance.CheckBulletUI(ref blackBullets, ref goldenBullets);
+        Destroy(bullet, 2);
     }
 
     bool IsMouseOverUI()

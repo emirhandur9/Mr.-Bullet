@@ -5,19 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
 
-
-
-    public void Death()
-    {
-        gameObject.tag = "Untagged";
-        GameManager.instance.CheckEnemyCount();
-
-        Rigidbody2D[] rbs = FindObjectsOfType<Rigidbody2D>();
-        foreach (var item in rbs)
-        {
-            item.constraints = RigidbodyConstraints2D.None;
-        }
-    }
+    public AudioClip death;
 
     private void OnTriggerEnter2D(Collider2D target)
     {
@@ -43,7 +31,62 @@ public class Enemy : MonoBehaviour
             if (GetComponent<Rigidbody2D>().velocity.magnitude > 2)
                 Death();
         }
+
+        if (target.CompareTag("EnemyItself"))
+        {
+            GetComponent<Rigidbody2D>().AddForce(new Vector2((direction.x > 0 ? 1 : -1) * 15, 0), ForceMode2D.Impulse);
+        }
+
     }
 
     
+    public void Death()
+    {
+        gameObject.tag = "Untagged";
+        GameManager.instance.CheckEnemyCount();
+
+        //Rigidbody2D[] rbs = FindObjectsOfType<Rigidbody2D>();
+        transform.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+        foreach (Rigidbody2D rb in FindChildRB(transform))
+        {
+            rb.constraints = RigidbodyConstraints2D.None;
+        }
+        SoundManager.instance.PlaySoundFX(death, .75f);
+    }
+
+    private List<Rigidbody2D> FindChildRB(Transform transform)
+    {
+        List<Rigidbody2D> rigidbody2Ds = new List<Rigidbody2D>();
+
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            Transform childUp = transform.GetChild(i);
+
+            if (childUp.childCount == 0) //child'i olmayanlar
+            {
+
+                if (childUp.GetComponent<Rigidbody2D>() != null)
+                {
+                    rigidbody2Ds.Add(childUp.GetComponent<Rigidbody2D>());
+                }
+            }
+            else //child'i olanlar.
+            {
+                if (childUp.GetComponent<Rigidbody2D>() != null)
+                {
+                    rigidbody2Ds.Add(childUp.GetComponent<Rigidbody2D>());
+                }
+
+                for (int j = 0; j < childUp.childCount; j++)
+                {
+                    if (childUp.GetChild(j).GetComponent<Rigidbody2D>() != null)
+                    {
+                        rigidbody2Ds.Add(childUp.GetChild(j).GetComponent<Rigidbody2D>());
+                    }
+                }
+            }
+        }
+        Debug.Log(rigidbody2Ds.Count);
+        return rigidbody2Ds;
+    }
 }

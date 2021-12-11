@@ -242,5 +242,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d13a5fee05d726c4a87751f5d6a1a672, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  boxHit: {fileID: 8300000, guid: c181eca4d3dcdd140ad8101a37738788, type: 3}
+  plankHit: {fileID: 8300000, guid: 020bbcc04b9128b4eaafa856622297d0, type: 3}
+  groundHit: {fileID: 8300000, guid: 3a1dd4fa8a19aa4428a805bda89c514a, type: 3}
+  explodeHit: {fileID: 8300000, guid: 02afd22d03389bd419ac1e036f6069a3, type: 3}
   bloodParticle: {fileID: 3093154006611334939, guid: 1f31ae25b18f2ba418a9a547ca6f8c1f, type: 3}
-  woodParticle: {fileID: 8170973343851333058, guid: 45fab679a5a66cb46aeee3691733b68a, type: 3}
+  woodParticle: {fileID: 3671294874002917533, guid: fd0639ddd4d477b4bb34950d13d19758, type: 3}

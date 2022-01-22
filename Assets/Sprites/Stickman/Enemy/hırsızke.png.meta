@@ -1,16 +1,19 @@
 fileFormatVersion: 2
-guid: b953c5567bc6a46468bf5288c175cf0a
+guid: 6f0b4a0c57ede884d9e265af3d239d3c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -776957325500069028
-    second: Archer1_0
+      213: -941434238307273916
+    second: "h\u0131rs\u0131zke_0"
   - first:
-      213: 1230689137155489738
-    second: Archer1_1
+      213: -3445087457022584712
+    second: "h\u0131rs\u0131zke_1"
   - first:
-      213: -1263413944603237373
-    second: Archer1_2
+      213: -5049541536589705017
+    second: "h\u0131rs\u0131zke_2"
+  - first:
+      213: 1750055829686155316
+    second: "h\u0131rs\u0131zke_3"
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -41,7 +44,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -55,7 +58,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 350
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -77,7 +80,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -89,7 +92,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -101,7 +104,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -112,64 +115,85 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Archer1_0
+      name: "h\u0131rs\u0131zke_0"
       rect:
         serializedVersion: 2
-        x: 267
-        y: 895
-        width: 206
-        height: 204
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 269
+        y: 887
+        width: 195
+        height: 247
+      alignment: 9
+      pivot: {x: 0.48778576, y: 0.013030141}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c5b4eefcd61b735f0800000000000000
-      internalID: -776957325500069028
+      spriteID: 443fd465c8a5fe2f0800000000000000
+      internalID: -941434238307273916
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Archer1_1
+      name: "h\u0131rs\u0131zke_1"
       rect:
         serializedVersion: 2
-        x: 347
-        y: 523
-        width: 42
-        height: 340
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 448
+        y: 505
+        width: 108
+        height: 323
+      alignment: 9
+      pivot: {x: 0.52149963, y: 0.5886633}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: acfb511ff39441110800000000000000
-      internalID: 1230689137155489738
+      spriteID: 878d300f5379030d0800000000000000
+      internalID: -3445087457022584712
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Archer1_2
+      name: "h\u0131rs\u0131zke_2"
       rect:
         serializedVersion: 2
-        x: 443
-        y: 520
-        width: 121
-        height: 317
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 335
+        y: 511
+        width: 47
+        height: 345
+      alignment: 9
+      pivot: {x: 0.4999987, y: 0.98459613}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 30426a316b3777ee0800000000000000
-      internalID: -1263413944603237373
+      spriteID: 7c09df0e9bc6ce9b0800000000000000
+      internalID: -5049541536589705017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "h\u0131rs\u0131zke_3"
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 496
+        width: 91
+        height: 356
+      alignment: 9
+      pivot: {x: 0.23632644, y: 0.9891903}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4387b814182794810800000000000000
+      internalID: 1750055829686155316
       vertices: []
       indices: 
       edges: []
